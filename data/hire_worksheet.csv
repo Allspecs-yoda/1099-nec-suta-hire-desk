@@ -1,0 +1,10 @@
+scenario_id,role,state,kind,annual_wages,suta_rate,notes
+TX-DEV-W2,staff engineer,TX,w2,120000,0.027,new-employer-ish 2.7% demo rate — replace with your notice
+TX-DEV-1099,staff engineer,TX,contractor,120000,0.0,same cash to worker; no employer FICA/FUTA/SUTA in this model
+CA-CSR-W2,support lead,CA,w2,65000,0.034,CA wage base is only 7000 so SUTA is small vs FICA
+WA-CSR-W2,support lead,WA,w2,65000,0.015,WA 78200 wage base — SUTA bites much harder than CA
+IA-OPS-W2,ops hire,IA,w2,48000,0.02,IA wage base fell 39500→20400 in 2026 (SF 607)
+NY-OPS-W2,ops hire,NY,w2,48000,0.025,NY wage base 12800→17600 per EY 2026-01-05
+WA-EXEC-W2,director,WA,w2,200000,0.012,hits SS wage base 184500 + WA SUTA 78200
+FL-GIG-1099,videographer,FL,contractor,1850,0.0,under $2000 NEC threshold — log anyway
+FL-GIG-1099B,videographer,FL,contractor,2400,0.0,crosses $2000 — issue 1099-NEC
