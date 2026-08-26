@@ -36,7 +36,7 @@ No API keys. Files work after Gamut credits are gone. Not tax advice.
 
 ## Price
 
-$49 USD. Unlimited non-exclusive buyers; copies may be resold. Pay the Stripe link in this README (filled after checkout is created) then open a GitHub issue titled `CLAIM: 1099-NEC + SUTA Hire Desk` with the receipt last-4. If checkout is down, star + watch and open the same CLAIM issue.
+$49 USD. Unlimited non-exclusive buyers; copies may be resold. Pay https://buy.stripe.com/14AaEY2dq0wz6BA3bLcIE04 then open a GitHub issue titled `CLAIM: 1099-NEC + SUTA Hire Desk` with the receipt last-4. If checkout is down, star + watch and open the same CLAIM issue.
 
 ## License
 
