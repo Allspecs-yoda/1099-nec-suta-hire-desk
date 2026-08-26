@@ -1,0 +1,18 @@
+rule,value,notes,source,as_of
+nec_box1a_threshold_ty2026,2000,Minimum for certain information returns / backup withholding for tax years beginning after 2025,IRS Instructions 1099-MISC/NEC (12/2026) What's New,2026-12
+nec_prior_threshold,600,Legacy $600; do not use for TY2026 federal NEC box 1a,pre-2026 instructions,2025
+nec_irs_due,January 31,File Form 1099-NEC with IRS on or before January 31 paper or electronic (sec. 6071(c)),IRS i1099mec,2026
+nec_payee_statement_due,January 31,Furnish copy to recipient by January 31,IRS i1099mec,2026
+misc_irs_due_paper,February 28,1099-MISC paper,IRS i1099mec,2026
+misc_irs_due_electronic,March 31,1099-MISC electronic,IRS i1099mec,2026
+e_file_threshold,10,Aggregate 10+ information returns must e-file (T.D. 9972) effective returns due on/after 2024-01-01,T.D. 9972 / i1099mec,2024
+backup_withholding_rate,0.24,IRC 3406 current rate 24 percent,IRS Backup withholding page,2026
+direct_sales_indicator,5000,Box 2 1099-NEC / Box 7 1099-MISC consumer products,IRS i1099mec,2026
+penalty_30_days_2026,60,Per return / payee statement due in 2026,IRS information-return-penalties table,2026
+penalty_aug1_2026,130,31 days late through August 1,IRS,2026
+penalty_after_aug1_2026,340,After August 1 or not filed,IRS,2026
+penalty_intentional_2026,680,Intentional disregard; no annual cap,IRS,2026
+new_box_1b,Cash tips,1099-NEC box 1b (OBBBA / 12/2026 instructions),IRS i1099mec,2026
+new_box_1c,TTOC,Treasury Tipped Occupation Code(s),IRS i1099mec,2026
+new_box_1d,Overtime compensation,1099-NEC box 1d,IRS i1099mec,2026
+iris,IRIS Taxpayer Portal,Free IRS e-file for 1099 series,IRS Pub 5717,2026
