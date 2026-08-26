@@ -1,0 +1,25 @@
+item,value,unit,notes,source,as_of
+social_security_wage_base_2026,184500,USD,OASDI contribution and benefit base,SSA oact/cola/cbb,2026
+social_security_wage_base_2025,176100,USD,prior year,SSA,2025
+oasdi_employee_rate,0.062,rate,employee share,SSA statute,2026
+oasdi_employer_rate,0.062,rate,employer share,SSA statute,2026
+oasdi_self_employed_rate,0.124,rate,combined on SE base,IRC 1401,2026
+medicare_employee_rate,0.0145,rate,no wage cap,SSA,2026
+medicare_employer_rate,0.0145,rate,no wage cap,SSA,2026
+medicare_self_employed_rate,0.029,rate,combined,IRC 1401,2026
+additional_medicare_employee_rate,0.009,rate,employee-only; $200000 single / $250000 MFJ / $125000 MFS,IRC 3101(b)(2),ongoing
+se_net_multiplier,0.9235,factor,net earnings from self-employment × 0.9235,IRC 1402(a)(12),ongoing
+futa_wage_base,7000,USD,unchanged since 1983,FUTA / EY 2026-0124,2026
+futa_gross_rate,0.06,rate,statutory,IRC 3301,2026
+futa_credit,0.054,rate,if state not credit-reduced,IRC 3302,2026
+futa_net_rate_full_credit,0.006,rate,$42 per employee at full credit,IRC 3302,2026
+futa_credit_reduction_final_date,2026-11-10,date,DOL OUI; do not treat commercial lists as final,https://oui.doleta.gov/unemploy/futa_credit.asp,2026-08-25
+standard_deduction_single_2026,16100,USD,TY2026 under OBBB,IRS IR-2025 inflation / newsroom,2026
+standard_deduction_mfj_2026,32200,USD,TY2026 under OBBB,IRS newsroom,2026
+standard_deduction_hoh_2026,24150,USD,TY2026 under OBBB,IRS newsroom,2026
+standard_deduction_single_2025_obbb,15750,USD,TY2025 under OBBB,IRS newsroom,2025
+qbi_rate,0.20,rate,Sec 199A; this desk applies a simple 20% of QBI after 1/2 SE; does NOT model wage/UBIA limits,IRC 199A,ongoing
+estimated_tax_owe_threshold,1000,USD,pay estimates if expect to owe >= this after withholding,IRS Topic 306,2026
+safe_harbor_prior_year,1.00,factor,100% of prior-year tax if 2025 AGI <= 150000,Pub 505,2026
+safe_harbor_prior_year_high_agi,1.10,factor,110% if 2025 AGI > 150000 (MFS 75000),Pub 505,2026
+safe_harbor_high_agi_threshold,150000,USD,prior-year AGI,Pub 505,2026
