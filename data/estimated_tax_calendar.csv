@@ -1,0 +1,5 @@
+period,income_start,income_end,due,due_note,source
+Q1,2026-01-01,2026-03-31,2026-04-15,received or postmarked,IRS Pub 505 / Form 1040-ES
+Q2,2026-04-01,2026-05-31,2026-06-15,short period (~8 weeks),IRS Pub 505
+Q3,2026-06-01,2026-08-31,2026-09-15,,IRS Pub 505
+Q4,2026-09-01,2026-12-31,2027-01-18,Jan 15 2027 is Saturday; next business day,IRS weekend/holiday rule + Form 1040-ES
