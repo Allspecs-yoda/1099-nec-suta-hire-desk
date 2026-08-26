@@ -1,0 +1,9 @@
+contractor_id,name,tin_on_file,ytd_paid,backup_withholding,state,notes
+C-01,River Patel,yes,0,no,TX,W-9 collected at onboarding
+C-02,Sam Okonkwo,yes,1500,no,FL,under threshold so far
+C-03,Jordan Lee,yes,1995,no,CA,one more $50 invoice crosses $2000
+C-04,Alex Kim,no,3200,yes,NY,no W-9 → 24% backup withholding
+C-05,Morgan Blake,yes,18000,no,WA,well over threshold
+C-06,Priya Shah,yes,600,no,IL,legacy $600 muscle-memory — still under $2000
+C-07,Chris Nguyen,yes,2100,no,TX,just over
+C-08,Dana Ruiz,yes,0,no,CO,signed but unpaid
