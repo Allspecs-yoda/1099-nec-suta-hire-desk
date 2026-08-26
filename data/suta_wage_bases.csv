@@ -1,0 +1,58 @@
+jurisdiction,abbrev,kind,wage_base_2025,wage_base_2026,delta,employee_sui_note,notes,source,as_of
+Alabama,AL,standard,8000,8000,0,,fixed,EY Tax Alert 2026-0124,2026-01-05
+Alaska,AK,standard,51700,54200,2500,employee 0.50% on wages up to 2026 wage base,employee SUI; indexed,EY Tax Alert 2026-0124,2026-01-05
+Arizona,AZ,standard,8000,8000,0,,fixed,EY Tax Alert 2026-0124,2026-01-05
+Arkansas,AR,standard,7000,7000,0,,EST per EY; trust-fund rule HB 1430,EY Tax Alert 2026-0124,2026-01-05
+California,CA,standard,7000,7000,0,,FUTA floor; fixed,EY Tax Alert 2026-0124,2026-01-05
+Colorado,CO,standard,27200,30600,3400,,SB 20-207 staircase; 2026 is last statutory step then AAWW,EY Tax Alert 2026-0124,2026-01-05
+Connecticut,CT,standard,26100,27000,900,,indexed after 2024,EY Tax Alert 2026-0124,2026-01-05
+Delaware,DE,standard,12500,14500,2000,,HB 433 phase-in; 2027 scheduled 16500,EY Tax Alert 2026-0124,2026-01-05
+District of Columbia,DC,standard,9000,9000,0,,fixed,EY Tax Alert 2026-0124,2026-01-05
+Florida,FL,standard,7000,7000,0,,FUTA floor; no state income tax,EY Tax Alert 2026-0124,2026-01-05
+Georgia,GA,standard,9500,9500,0,,fixed,EY Tax Alert 2026-0124,2026-01-05
+Hawaii,HI,standard,62000,64500,2500,,indexed,EY Tax Alert 2026-0124,2026-01-05
+Idaho,ID,standard,55300,58300,3000,,indexed,EY Tax Alert 2026-0124,2026-01-05
+Illinois,IL,standard,13916,14250,334,,indexed,EY Tax Alert 2026-0124,2026-01-05
+Indiana,IN,standard,9500,9500,0,,fixed,EY Tax Alert 2026-0124,2026-01-05
+Iowa,IA,standard,39500,20400,-19100,,SF 607 (2025) cut wage base,EY Tax Alert 2026-0124,2026-01-05
+Kansas,KS,standard,14000,15100,1100,,HB 2570; now % of statewide AAW,EY Tax Alert 2026-0124,2026-01-05
+Kentucky,KY,standard,11700,12000,300,,+$300/year until 12000,EY Tax Alert 2026-0124,2026-01-05
+Louisiana,LA,standard,7700,7000,-700,,decreased 2026,EY Tax Alert 2026-0124,2026-01-05
+Maine,ME,standard,12000,12000,0,,fixed,EY Tax Alert 2026-0124,2026-01-05
+Maryland,MD,standard,8500,8500,0,,fixed,EY Tax Alert 2026-0124,2026-01-05
+Massachusetts,MA,standard,15000,15000,0,,fixed,EY Tax Alert 2026-0124,2026-01-05
+Michigan,MI,good_standing,9000,9000,0,,$9000 if trust fund + employer good standing; else $9500,EY Tax Alert 2026-0124,2026-01-05
+Michigan,MI,delinquent,9500,9500,0,,delinquent / missing reports / unpaid > $25,EY Tax Alert 2026-0124,2026-01-05
+Minnesota,MN,standard,43000,44000,1000,,indexed,EY Tax Alert 2026-0124,2026-01-05
+Mississippi,MS,standard,14000,14000,0,,fixed,EY Tax Alert 2026-0124,2026-01-05
+Missouri,MO,standard,9500,9000,-500,,trust-fund trigger; floor 7000 ceiling 13000,EY Tax Alert 2026-0124,2026-01-05
+Montana,MT,standard,45100,47300,2200,,indexed; HB 210 rate trigger 2025,EY Tax Alert 2026-0124,2026-01-05
+Nebraska,NE,standard,9000,9000,0,,most employers,EY Tax Alert 2026-0124,2026-01-05
+Nebraska,NE,max_rate,24000,24000,0,,highest UI tax group (category 20) / LB 428,EY Tax Alert 2026-0124,2026-01-05
+Nevada,NV,standard,41800,43700,1900,,indexed; no state income tax,EY Tax Alert 2026-0124,2026-01-05
+New Hampshire,NH,standard,14000,14000,0,,no tax on earned income,EY Tax Alert 2026-0124,2026-01-05
+New Jersey,NJ,standard,43300,44800,1500,employee 0.3825% on wages up to 2026 wage base,includes WDP/SWF surcharge in employee rate per EY,EY Tax Alert 2026-0124,2026-01-05
+New Mexico,NM,standard,33200,34800,1600,,indexed,EY Tax Alert 2026-0124,2026-01-05
+New York,NY,standard,12800,17600,4800,,EY 2026-01-05; Nextep 2025-11-17 still listed 13000 — use EY; verify NYS DOL,EY Tax Alert 2026-0124,2026-01-05
+North Carolina,NC,standard,32600,34200,1600,,indexed,EY Tax Alert 2026-0124,2026-01-05
+North Dakota,ND,standard,45100,46600,1500,,indexed,EY Tax Alert 2026-0124,2026-01-05
+Ohio,OH,standard,9000,9000,0,,fixed,EY Tax Alert 2026-0124,2026-01-05
+Oklahoma,OK,standard,28200,25000,-3200,,SB 911 reduced % of AAW,EY Tax Alert 2026-0124,2026-01-05
+Oregon,OR,standard,54300,56700,2400,,indexed,EY Tax Alert 2026-0124,2026-01-05
+Pennsylvania,PA,standard,10000,10000,0,employee 0.07% on total wages (not capped at wage base per EY),employee SUI on total wages,EY Tax Alert 2026-0124,2026-01-05
+Puerto Rico,PR,standard,7000,7000,0,,Secretary may raise to 10500,EY Tax Alert 2026-0124,2026-01-05
+Rhode Island,RI,standard,29800,30800,1000,,positive-balance employers,EY Tax Alert 2026-0124,2026-01-05
+Rhode Island,RI,negative_balance,31300,32300,1000,,negative-balance / max-rate employers (+1500 vs standard),EY Tax Alert 2026-0124,2026-01-05
+South Carolina,SC,standard,14000,14000,0,,fixed,EY Tax Alert 2026-0124,2026-01-05
+South Dakota,SD,standard,15000,15000,0,,no state income tax,EY Tax Alert 2026-0124,2026-01-05
+Tennessee,TN,standard,7000,7000,0,,trust-fund rule; $7000 if fund > $1B on Dec 31,EY Tax Alert 2026-0124,2026-01-05
+Texas,TX,standard,9000,9000,0,,no state income tax,EY Tax Alert 2026-0124,2026-01-05
+Utah,UT,standard,48900,50700,1800,,indexed,EY Tax Alert 2026-0124,2026-01-05
+Vermont,VT,standard,14800,15400,600,,indexed,EY Tax Alert 2026-0124,2026-01-05
+Virginia,VA,standard,8000,8000,0,,fixed,EY Tax Alert 2026-0124,2026-01-05
+Virgin Islands,VI,standard,31100,32100,1000,,indexed,EY Tax Alert 2026-0124,2026-01-05
+Washington,WA,standard,72800,78200,5400,,highest 2026 CONUS wage base in this table,EY Tax Alert 2026-0124,2026-01-05
+West Virginia,WV,standard,9500,9500,0,,SB 841 (2024) set 9500,EY Tax Alert 2026-0124,2026-01-05
+Wisconsin,WI,standard,14000,14000,0,,fixed,EY Tax Alert 2026-0124,2026-01-05
+Wyoming,WY,standard,32400,33800,1400,,indexed; no state income tax,EY Tax Alert 2026-0124,2026-01-05
+Federal FUTA,US,futa,7000,7000,0,,IRC 3301/3302; net 0.6% if full 5.4% credit. Final credit-reduction list is Nov 10 (DOL OUI).,EY Tax Alert 2026-0124,2026-01-05
