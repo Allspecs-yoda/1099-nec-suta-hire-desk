@@ -2,7 +2,7 @@
 
 **$49 USD**, unlimited buyers, non-exclusive, resellable copies.
 
-Pay the Stripe Payment Link in README.md then open a GitHub issue titled `CLAIM: 1099-NEC + SUTA Hire Desk` with the receipt last-4.
+Pay https://buy.stripe.com/14AaEY2dq0wz6BA3bLcIE04 then open a GitHub issue titled `CLAIM: 1099-NEC + SUTA Hire Desk` with the receipt last-4.
 
 If checkout is down: star + watch the repo and open the same CLAIM issue.
 
