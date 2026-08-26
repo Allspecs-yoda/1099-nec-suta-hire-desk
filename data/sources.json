@@ -1,0 +1,41 @@
+{
+  "compiled": "2026-08-26",
+  "sku": "NSF-20260826-NEC-SUTA-HIRE",
+  "sources": [
+    {
+      "id": "ssa-cbb-2026",
+      "url": "https://www.ssa.gov/oact/cola/cbb.html",
+      "fact": "OASDI contribution and benefit base 2026 = $184,500"
+    },
+    {
+      "id": "irs-1099-instr-2026",
+      "url": "https://www.irs.gov/instructions/i1099mec",
+      "fact": "TY2026 1099-NEC box 1a threshold $2,000; file Jan 31"
+    },
+    {
+      "id": "irs-penalties-2026",
+      "url": "https://www.irs.gov/payments/information-return-penalties",
+      "fact": "Returns due 2026: $60 / $130 / $340 / $680 intentional"
+    },
+    {
+      "id": "irs-ty2026-inflation",
+      "url": "https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2026-including-amendments-from-the-one-big-beautiful-bill",
+      "fact": "TY2026 standard deduction $16,100 / $32,200 / $24,150; ordinary brackets"
+    },
+    {
+      "id": "irs-backup-wh",
+      "url": "https://www.irs.gov/businesses/small-businesses-self-employed/backup-withholding",
+      "fact": "Backup withholding 24%"
+    },
+    {
+      "id": "ey-sui-2026-0124",
+      "url": "https://taxnews.ey.com/news/2026-0124-2026-state-unemployment-insurance-taxable-wage-bases",
+      "fact": "SUTA wage bases as of 2026-01-05; FUTA base still $7,000"
+    },
+    {
+      "id": "dol-oui-futa",
+      "url": "https://oui.doleta.gov/unemploy/futa_credit.asp",
+      "fact": "Credit reduction not final until Nov 10; page updated 2026-08-25"
+    }
+  ]
+}
