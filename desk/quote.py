@@ -11,6 +11,10 @@ Usage:
   python3 desk/quote.py --batch data/hire_worksheet.csv
   python3 desk/quote.py --list IA
   python3 desk/quote.py --roster data/contractor_roster.csv
+  python3 desk/quote.py --futa-watch
+  python3 desk/quote.py --state CA --wages 65000 --suta-rate 0.034 --futa-range
+  python3 desk/quote.py --gaps
+  python3 desk/quote.py --nec --paid 900 --next 0 --state MA
 """
 from __future__ import annotations
 
@@ -194,10 +198,26 @@ def contractor_quote(net_profit: float, status: str, apply_qbi: bool) -> dict:
     }
 
 
-def nec_check(paid: float, nxt: float) -> dict:
+def nec_check(paid: float, nxt: float, state: str | None = None) -> dict:
     rules = {r["rule"]: r for r in load_csv("1099_rules.csv")}
     thresh = fnum(rules["nec_box1a_threshold_ty2026"]["value"])
     after = paid + nxt
+    gaps = []
+    if state:
+        st = state.strip().upper()
+        for r in load_csv("state_1099_gaps.csv"):
+            if r["abbrev"].upper() == st:
+                gaps.append(
+                    {
+                        "form": r["form"],
+                        "threshold_usd": fnum(r["threshold_usd"]),
+                        "federal_threshold_usd": fnum(r["federal_threshold_usd"]),
+                        "gap_usd": fnum(r["gap_usd"]),
+                        "direct_state_file": r["direct_state_file"],
+                        "due": r["due"],
+                        "notes": r["notes"],
+                    }
+                )
     return {
         "mode": "nec",
         "ytd_paid": paid,
@@ -215,7 +235,59 @@ def nec_check(paid: float, nxt: float) -> dict:
         "penalty_30d": rules["penalty_30_days_2026"]["value"],
         "penalty_aug1": rules["penalty_aug1_2026"]["value"],
         "penalty_after": rules["penalty_after_aug1_2026"]["value"],
-        "note": "State 1099 thresholds may still be $600. Log every payment. Not tax advice.",
+        "state": state.upper() if state else None,
+        "state_gaps": gaps,
+        "note": "State 1099 / 1099-K floors can still be $600 even when federal NEC is $2,000. Log every payment. Not tax advice.",
+    }
+
+
+def futa_watch_rows() -> list[dict]:
+    return load_csv("futa_credit_watch_2026.csv")
+
+
+def pick_futa_watch(state: str) -> dict | None:
+    st = state.strip().upper()
+    for r in futa_watch_rows():
+        if r["abbrev"].upper() == st and r["status"] == "potential":
+            return r
+    return None
+
+
+def futa_scenarios(state: str, wages: float, suta_rate: float, kind: str | None) -> dict:
+    watch = pick_futa_watch(state)
+    if not watch:
+        full = w2_loaded(state, wages, suta_rate, 0.0, kind)
+        return {
+            "mode": "futa_range",
+            "on_watch": False,
+            "state": state.upper(),
+            "note": "Not on the cited 2026 potential FUTA-reduction list. Default extra rate = 0 until DOL finalizes Nov 10.",
+            "full_credit": full,
+        }
+    base_extra = fnum(watch["potential_base_reduction"])
+    bcr_extra = fnum(watch["potential_total_with_bcr"])
+    none = w2_loaded(state, wages, suta_rate, 0.0, kind)
+    base = w2_loaded(state, wages, suta_rate, base_extra, kind)
+    bcr = w2_loaded(state, wages, suta_rate, bcr_extra, kind)
+    return {
+        "mode": "futa_range",
+        "on_watch": True,
+        "state": watch["abbrev"],
+        "jurisdiction": watch["jurisdiction"],
+        "final_date": watch["final_date"],
+        "title_xii_jan1_2026": watch["title_xii_jan1_2026"],
+        "bcr_waiver_possible": watch["bcr_waiver_possible"],
+        "potential_base_reduction": base_extra,
+        "potential_bcr_addon": fnum(watch["potential_bcr_addon"]),
+        "potential_total_with_bcr": bcr_extra,
+        "extra_per_ee_base_usd": fnum(watch["extra_per_ee_base_usd"]),
+        "extra_per_ee_bcr_usd": fnum(watch["extra_per_ee_bcr_usd"]),
+        "source": watch["source"],
+        "notes": watch["notes"],
+        "full_credit": none,
+        "if_base": base,
+        "if_bcr": bcr,
+        "q4_note": "Credit-reduction extra is a Q4 Form 940 / Schedule A item (due Jan 31 following year). Not final until Nov 10.",
     }
 
 
@@ -280,7 +352,69 @@ def print_nec(d: dict) -> None:
     print(f"  IRS + payee due {d['due']}; e-file if you file {d['e_file_if_forms']}+ information returns")
     print(f"  backup withholding {float(d['backup_withholding'])*100:.0f}% if no TIN")
     print(f"  penalties 2026: {d['penalty_30d']} / {d['penalty_aug1']} / {d['penalty_after']} per return (30d / through Aug 1 / after)")
+    if d.get("state_gaps"):
+        print(f"  state {d['state']} information-return gaps:")
+        for g in d["state_gaps"]:
+            print(
+                f"    {g['form']}: state ${g['threshold_usd']:.0f} vs federal ${g['federal_threshold_usd']:.0f} "
+                f"(gap ${g['gap_usd']:.0f}) due {g['due']}"
+            )
+            print(f"      {g['notes']}")
+            print(f"      file: {g['direct_state_file']}")
     print(f"  {d['note']}")
+
+
+def print_futa_watch() -> None:
+    print("2026 FUTA credit-reduction WATCH (not final — DOL Nov 10)")
+    print(f"{'abbr':<4} {'status':<12} {'base':>7} {'BCR':>7} {'total':>7}  extra$/ee base/BCR")
+    for r in futa_watch_rows():
+        print(
+            f"{r['abbrev']:<4} {r['status']:<12} {fnum(r['potential_base_reduction'])*100:6.1f}% "
+            f"{fnum(r['potential_bcr_addon'])*100:6.1f}% {fnum(r['potential_total_with_bcr'])*100:6.1f}%  "
+            f"{money(fnum(r['extra_per_ee_base_usd']))}/{money(fnum(r['extra_per_ee_bcr_usd']))}"
+        )
+        print(f"     {r['notes'][:110]}")
+    print("Default calculator extra rate is still 0. Pass --futa-scenario base|bcr or --futa-range.")
+
+
+def print_futa_range(d: dict) -> None:
+    if not d["on_watch"]:
+        print(f"{d['state']} — {d['note']}")
+        print_w2(d["full_credit"])
+        return
+    print(f"{d['jurisdiction']} ({d['state']}) FUTA watch  wages {money(d['full_credit']['wages'])}")
+    print(f"  potential base {d['potential_base_reduction']*100:.1f}%  BCR add-on {d['potential_bcr_addon']*100:.1f}%  total-with-BCR {d['potential_total_with_bcr']*100:.1f}%")
+    print(f"  BCR waiver possible: {d['bcr_waiver_possible']}  final: {d['final_date']}")
+    print(f"  extra $/employee vs 0.6%: base {money(d['extra_per_ee_base_usd'])}  with BCR {money(d['extra_per_ee_bcr_usd'])}")
+    print()
+    print("  — if full 5.4% credit (default, not final) —")
+    print_w2(d["full_credit"])
+    print()
+    print("  — if base reduction lands —")
+    print_w2(d["if_base"])
+    print()
+    print("  — if BCR add-on also lands —")
+    print_w2(d["if_bcr"])
+    print()
+    print(f"  {d['q4_note']}")
+    print(f"  {d['notes']}")
+
+
+def cmd_gaps(state: str | None) -> None:
+    rows = load_csv("state_1099_gaps.csv")
+    if state:
+        st = state.strip().upper()
+        rows = [r for r in rows if r["abbrev"].upper() == st]
+        if not rows:
+            raise SystemExit(f"no cited 1099 gap rows for {state}")
+    print(f"{'abbr':<4} {'form':<32} {'state$':>8} {'fed$':>8} {'gap$':>8}  due")
+    for r in rows:
+        print(
+            f"{r['abbrev']:<4} {r['form']:<32} {int(fnum(r['threshold_usd'])):8d} "
+            f"{int(fnum(r['federal_threshold_usd'])):8d} {int(fnum(r['gap_usd'])):8d}  {r['due']}"
+        )
+        print(f"     {r['notes']}")
+        print(f"     {r['direct_state_file']}")
 
 
 def cmd_list(state: str | None) -> None:
@@ -375,6 +509,15 @@ def main() -> None:
     p.add_argument("--suta-rate", type=float, default=None, help="your employer SUTA rate as decimal (0.027)")
     p.add_argument("--suta-kind", default=None, help="standard | delinquent | max_rate | negative_balance | good_standing")
     p.add_argument("--futa-add-rate", type=float, default=0.0, help="extra FUTA credit-reduction rate (e.g. 0.003). Default 0.")
+    p.add_argument("--futa-watch", action="store_true", help="print 2026 potential FUTA credit-reduction watch (not final)")
+    p.add_argument("--futa-range", action="store_true", help="print full-credit / base / BCR FUTA scenarios for --state")
+    p.add_argument(
+        "--futa-scenario",
+        choices=["full", "base", "bcr"],
+        default=None,
+        help="apply the cited watch rate for --state (full=0, base, or total-with-BCR). Still not final.",
+    )
+    p.add_argument("--gaps", nargs="?", const="ALL", help="print cited state 1099 / 1099-K gaps (optional state)")
     p.add_argument("--compare", action="store_true", help="W-2 employer cost vs same cash as 1099")
     p.add_argument("--contractor", action="store_true", help="self-employed estimated tax on --net-profit")
     p.add_argument("--net-profit", type=float, help="Schedule C net profit")
@@ -392,6 +535,12 @@ def main() -> None:
     if args.list:
         cmd_list(None if args.list == "ALL" else args.list)
         return
+    if args.futa_watch:
+        print_futa_watch()
+        return
+    if args.gaps:
+        cmd_gaps(None if args.gaps == "ALL" else args.gaps)
+        return
     if args.batch:
         cmd_batch(Path(args.batch), args.suta_rate, args.json)
         return
@@ -399,7 +548,7 @@ def main() -> None:
         cmd_roster(Path(args.roster), args.json)
         return
     if args.nec:
-        d = nec_check(args.paid, args.next_invoice)
+        d = nec_check(args.paid, args.next_invoice, args.state)
         print(json.dumps(d, indent=2) if args.json else "")
         if not args.json:
             print_nec(d)
@@ -413,13 +562,34 @@ def main() -> None:
         else:
             print_contractor(d)
         return
+    if args.futa_range:
+        if args.wages is None or args.state is None:
+            raise SystemExit("--futa-range needs --state and --wages")
+        rate = 0.027 if args.suta_rate is None else args.suta_rate
+        d = futa_scenarios(args.state, args.wages, rate, args.suta_kind)
+        if args.json:
+            print(json.dumps(d, indent=2))
+        else:
+            print_futa_range(d)
+        return
     if args.wages is None or args.state is None:
         p.print_help()
-        print("\nNeed --state and --wages (or --contractor / --nec / --list / --batch / --roster).", file=sys.stderr)
+        print("\nNeed --state and --wages (or --contractor / --nec / --list / --batch / --roster / --futa-watch / --gaps).", file=sys.stderr)
         raise SystemExit(2)
     rate = 0.027 if args.suta_rate is None else args.suta_rate
+    extra = args.futa_add_rate
+    if args.futa_scenario:
+        watch = pick_futa_watch(args.state)
+        if not watch:
+            raise SystemExit(f"{args.state} is not on the cited 2026 FUTA watch; extra stays 0")
+        if args.futa_scenario == "full":
+            extra = 0.0
+        elif args.futa_scenario == "base":
+            extra = fnum(watch["potential_base_reduction"])
+        else:
+            extra = fnum(watch["potential_total_with_bcr"])
     if args.compare:
-        d = compare(args.state, args.wages, rate, args.futa_add_rate, args.suta_kind, args.status)
+        d = compare(args.state, args.wages, rate, extra, args.suta_kind, args.status)
         if args.json:
             print(json.dumps(d, indent=2))
             return
@@ -430,7 +600,7 @@ def main() -> None:
         print(f"Employer cash: W-2 {money(d['w2_employer_cost'])} vs 1099 {money(d['contractor_employer_cost'])}")
         print(f"Employer saves vs W-2: {money(d['employer_saves_vs_w2'])}  — {d['misclass_flag']}")
         return
-    d = w2_loaded(args.state, args.wages, rate, args.futa_add_rate, args.suta_kind)
+    d = w2_loaded(args.state, args.wages, rate, extra, args.suta_kind)
     if args.json:
         print(json.dumps(d, indent=2))
     else:

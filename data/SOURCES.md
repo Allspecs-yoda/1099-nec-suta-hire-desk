@@ -46,11 +46,39 @@ Michigan has two rows (good-standing $9,000 vs delinquent $9,500). Nebraska and 
 
 Employer **SUTA rates are not in this pack** — they are on your experience-rating notice. Pass `--suta-rate`.
 
+## 2026 FUTA credit-reduction watch (not final)
+
+| Fact | Value used | Source |
+| --- | --- | --- |
+| Final date | Nov 10 of the tax year | [DOL OUI FUTA credit reductions](https://oui.doleta.gov/unemploy/futa_credit.asp) (updated 2026-08-25) |
+| Title XII borrowers Jan 1 2026 | **two** jurisdictions, $21.4B | [DOL Trust Fund Solvency Report 2026](https://oui.doleta.gov/unemploy/docs/trustFundSolvReport2026.pdf) (Feb 2026) |
+| Named on the potential-2026 list | California, U.S. Virgin Islands | PayrollOrg 2026-04-07 citing DOL *Potential 2026 FUTA Credit Reductions* (2026-01-15) |
+| CA potential | 1.5% base, or 5.3% with 3.8% BCR add-on (waiver possible) | same; Bloomberg Tax 2026-04-10 |
+| VI potential | 4.8% base; no BCR add-on cited for 2026 | same |
+| Extra $ / employee on $7,000 vs 0.6% | CA $105 / $371; VI $336 | arithmetic on FUTA wage base $7,000 |
+| When the extra is due | Q4 Form 940 / Schedule A; January 31 following year | [IRS FUTA credit reduction](https://www.irs.gov/businesses/small-businesses-self-employed/futa-credit-reduction) |
+
+The calculator **default extra rate is still 0**. `--futa-watch` and `--futa-range` print the potential benches. Do not treat commercial “seven states” lists as the 2026 watch.
+
+## State 1099 / 1099-K gaps
+
+| Fact | Value used | Source |
+| --- | --- | --- |
+| MA 1099-NEC | Follows IRS Pub 1220 amounts; **direct** MassTaxConnect file even if you use IRS CF/SF; NEC due Jan 31 | [Mass.gov Form 1099 Filing Requirements](https://www.mass.gov/info-details/massachusetts-form-1099-filing-requirements) (updated 2026-07-24) |
+| MA 1099-K | **$600** gross, any transaction count (federal TPSO goods/services restored to $20,000 and 200) | same Mass.gov page |
+| CA information returns | File with FTB if CA resident/part-year or CA-source; CF/SF forwards matching amounts | [FTB Guidance for reporting information returns](https://www.ftb.ca.gov/file/business/information-returns.html) (updated 2026-04-03) |
+| CA 1099-K TPSO goods/services | $20,000 **and** >200 transactions (Notice 2024-85 phase-in superseded, retroactive to 2022) | same FTB page |
+| CA 1099-K app-based drivers | **$600** still applies | same FTB page |
+| OR 1099-NEC | Follows IRS guidelines; **iWire** required; due Jan 31 | [Oregon DOR iWire](https://www.oregon.gov/dor/programs/businesses/pages/iwire.aspx) |
+
+This is **not** a 50-state 1099 matrix. Rows are only the official pages pulled this cycle.
+
 ## What this pack will not invent
 
-- A final 2026 FUTA credit-reduction list. DOL says the year is not final until **November 10**. Commercial “seven states” lists are not copied into the calculator default (extra rate starts at 0). Pass `--futa-add-rate 0.003` if you already know your state’s add-on.
+- A **final** 2026 FUTA credit-reduction list. DOL says the year is not final until **November 10**. The watch CSV is potential only; extra rate starts at 0.
 - Per-employee Additional Medicare on the employer side.
 - State income-tax estimates (except the employee-SUI footnotes EY published for AK / NJ / PA).
 - Worker classification. Cheaper ≠ 1099.
+- Uncited state 1099 $600 floors. Only MA / CA / OR pages above.
 
-Figures compiled 2026-08-26. Re-pull SSA / IRS / your state DOL if you ship after a statutory change.
+Figures compiled 2026-08-26; FUTA-watch polish 2026-08-27. Re-pull SSA / IRS / your state DOL if you ship after a statutory change.

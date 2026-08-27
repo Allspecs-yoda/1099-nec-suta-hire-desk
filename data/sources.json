@@ -1,5 +1,6 @@
 {
   "compiled": "2026-08-26",
+  "polished": "2026-08-27",
   "sku": "NSF-20260826-NEC-SUTA-HIRE",
   "sources": [
     {
@@ -36,6 +37,36 @@
       "id": "dol-oui-futa",
       "url": "https://oui.doleta.gov/unemploy/futa_credit.asp",
       "fact": "Credit reduction not final until Nov 10; page updated 2026-08-25"
+    },
+    {
+      "id": "dol-solvency-2026",
+      "url": "https://oui.doleta.gov/unemploy/docs/trustFundSolvReport2026.pdf",
+      "fact": "Two jurisdictions had Title XII advances on Jan 1 2026 totaling $21.4B; may be subject to additional FUTA credit reductions"
+    },
+    {
+      "id": "payrollorg-futa-2026-04-07",
+      "url": "https://payroll.org/news-resources/news/news-detail/2026/04/07/california-and-virgin-islands-may-face-credit-reduction-for-2026",
+      "fact": "Potential 2026 list: CA 1.5% (5.3% with 3.8% BCR), VI 4.8%; DOL Potential 2026 FUTA Credit Reductions dated 2026-01-15"
+    },
+    {
+      "id": "irs-futa-credit-reduction",
+      "url": "https://www.irs.gov/businesses/small-businesses-self-employed/futa-credit-reduction",
+      "fact": "Credit-reduction extra is a Q4 Form 940 / Schedule A item due January 31 of the following year"
+    },
+    {
+      "id": "mass-1099-2026-07-24",
+      "url": "https://www.mass.gov/info-details/massachusetts-form-1099-filing-requirements",
+      "fact": "MA 1099-K $600; NEC due Jan 31; direct MassTaxConnect even if CF/SF"
+    },
+    {
+      "id": "ftb-info-returns-2026-04-03",
+      "url": "https://www.ftb.ca.gov/file/business/information-returns.html",
+      "fact": "CA TPSO 1099-K $20k/200; app-based drivers still $600; CF/SF forwards matching amounts"
+    },
+    {
+      "id": "or-iwire",
+      "url": "https://www.oregon.gov/dor/programs/businesses/pages/iwire.aspx",
+      "fact": "Oregon 1099-NEC via iWire; due January 31; follows IRS guidelines"
     }
   ]
 }

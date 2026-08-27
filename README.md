@@ -1,6 +1,6 @@
 # 1099-NEC + SUTA Hire Desk
 
-Offline 2026 desk that prices a W-2 hire against the same cash on a 1099, using the new **$2,000** federal NEC threshold, SSA’s **$184,500** wage base, and a 57-row SUTA wage-base table (50 states + DC + PR + VI + FUTA).
+Offline 2026 desk that prices a W-2 hire against the same cash on a 1099, using the new **$2,000** federal NEC threshold, SSA’s **$184,500** wage base, a 57-row SUTA wage-base table (50 states + DC + PR + VI + FUTA), a **potential FUTA credit-reduction watch** (CA 1.5%/5.3%, VI 4.8% — not final until Nov 10), and cited **state 1099 / 1099-K gaps** (MA $600 1099-K, CA app-driver $600).
 
 ## Who it's for
 
@@ -14,8 +14,10 @@ Agency operators, tiny payroll shops, and freelancers who pay contractors **and*
 - `data/1099_rules.csv` — $2,000 NEC box 1a, Jan 31, 10-return e-file, 24% BWH, 2026 penalty tiers
 - `data/estimated_tax_calendar.csv` — 2026 quarters; Q4 due **2027-01-18**
 - `data/hire_worksheet.csv` / `data/contractor_roster.csv` — sample quotes and a live roster
-- `desk/quote.py` — offline `--compare`, `--contractor`, `--nec`, `--batch`, `--roster`, `--list`
-- `examples/` — TX vs WA, W-2 vs 1099, $2,000 cross, Iowa wage-base cut
+- `data/futa_credit_watch_2026.csv` — CA / VI potential 2026 FUTA reductions (DOL Nov 10; extra $/employee)
+- `data/state_1099_gaps.csv` — MA 1099-K $600 vs federal $20k/200; CA app-driver 1099-K $600; CF/SF notes
+- `desk/quote.py` — offline `--compare`, `--contractor`, `--nec`, `--batch`, `--roster`, `--list`, `--futa-watch`, `--futa-range`, `--futa-scenario`, `--gaps`
+- `examples/` — TX vs WA, W-2 vs 1099, $2,000 cross, Iowa wage-base cut, CA FUTA watch
 - `data/SOURCES.md` — citations
 
 ## Quick start
@@ -28,9 +30,13 @@ python3 desk/quote.py --nec --paid 1995 --next 80
 python3 desk/quote.py --batch data/hire_worksheet.csv
 python3 desk/quote.py --roster data/contractor_roster.csv
 python3 desk/quote.py --list IA
+python3 desk/quote.py --futa-watch
+python3 desk/quote.py --state CA --wages 65000 --suta-rate 0.034 --futa-range
+python3 desk/quote.py --gaps
+python3 desk/quote.py --nec --paid 900 --state MA
 ```
 
-Pass **your** SUTA rate (`--suta-rate 0.027`). FUTA extra credit-reduction defaults to 0 — DOL does not finalize 2026 until November 10; use `--futa-add-rate 0.003` if you already know it.
+Pass **your** SUTA rate (`--suta-rate 0.027`). FUTA extra credit-reduction defaults to 0 — DOL does not finalize 2026 until November 10. `--futa-watch` / `--futa-range` print the **potential** CA 1.5% (or 5.3% with BCR) and VI 4.8% benches; `--futa-scenario base|bcr` applies them on purpose.
 
 No API keys. Files work after Gamut credits are gone. Not tax advice.
 
